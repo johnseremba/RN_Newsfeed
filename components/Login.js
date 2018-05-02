@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import {Button, Container, Icon} from "native-base";
-import {Platform, ImageBackground, StyleSheet, Text, View} from "react-native";
+import { Platform, ImageBackground, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 export default class Login extends Component {
+
+    static navigationOptions = {
+        title: 'Login',
+        header: false
+    };
+
+    login() {
+        return this.props.navigation.navigate('Dashboard');
+    }
+
     render() {
+        const { navigate } = this.props.navigation;
         const heading = 'NEWS FEED';
         const subHeading = 'Stay informed';
         const facebookLabel = 'Login with Facebook';
@@ -25,7 +36,10 @@ export default class Login extends Component {
                             <Text style={[styles.subheading, styles.textColor]}>
                                 {subHeading}
                             </Text>
-                            <Button full rounded style={{marginTop: 50, backgroundColor: '#3b5998'}}>
+                            <Button full rounded
+                                    style={{marginTop: 50, backgroundColor: '#3b5998'}}
+                                    onPress={() => this.login()}
+                            >
                                 <Icon name='logo-facebook'/>
                                 <Text style={styles.textColor}>
                                     {facebookLabel}
