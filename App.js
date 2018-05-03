@@ -3,7 +3,7 @@ import Login from "./components/Login";
 import {StackNavigator} from "react-navigation";
 import Dashboard from "./components/Dashboard";
 import {colors} from "./resources/colors";
-import {getTheme, StyleProvider} from "native-base";
+import {getTheme, Root, StyleProvider} from "native-base";
 import newsfeedTheme from "./native-base-theme/variables/newsfeedTheme";
 
 export default class App extends Component {
@@ -23,9 +23,11 @@ export default class App extends Component {
       });
 
     return (
-        <StyleProvider style={getTheme(newsfeedTheme)}>
-            <App />
-        </StyleProvider>
+        <Root>
+            <StyleProvider style={getTheme(newsfeedTheme)}>
+                <App />
+            </StyleProvider>
+        </Root>
     );
   }
 }
