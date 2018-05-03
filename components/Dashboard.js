@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Body, Button, Container, Content, Header, Icon, Left, Right, Tab, Text, Title} from "native-base";
 import {Tabs} from "native-base/src/index";
+import GlobalNews from "./GlobalNews";
 
 export default class Dashboard extends Component {
     static navigationOptions = {
@@ -33,7 +34,7 @@ export default class Dashboard extends Component {
             <Container>
                 <Tabs initialPage={0}>
                     <Tab heading='Global News'>
-                        <Text>Some Global news</Text>
+                        <GlobalNews/>
                     </Tab>
                     <Tab heading='Sports News'>
                         <Text>Sports News</Text>
