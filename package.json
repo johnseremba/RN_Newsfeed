@@ -10,6 +10,7 @@
     "native-base": "^2.4.3",
     "react": "16.3.1",
     "react-native": "0.55.3",
+    "react-native-custom-tabs": "^0.1.7",
     "react-native-linear-gradient": "^2.4.0",
     "react-navigation": "^1.5.11"
   },

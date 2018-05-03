@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Body, Button, Card, CardItem, Icon, Left, Right, Text, Thumbnail, ActionSheet} from "native-base";
-import {Image, Platform} from "react-native";
+import {Body, Button, Card, CardItem, Icon, Left, Right, Text, Thumbnail, ActionSheet, Toast, View} from 'native-base';
+import {Image, Platform, TouchableHighlight} from 'react-native';
+import {CustomTabs, ANIMATIONS_SLIDE} from "react-native-custom-tabs";
 
 export default class NewsCard extends Component {
 
@@ -16,7 +17,20 @@ export default class NewsCard extends Component {
             cancelButtonIndex: 3,
             title: 'Select an option'
         }, buttonIndex => {
-            // alert(`Clicked: ${BUTTONS[buttonIndex].text}`);
+            Toast.show({
+                text: `Clicked: ${BUTTONS[buttonIndex].text}`,
+                duration: 3000
+            });
+        });
+    }
+
+    openArticleUrl(url = 'https://www.google.com') {
+        CustomTabs.openURL(url, {
+            toolbarColor: '#607D8B',
+            enableUrlBarHiding: true,
+            showPageTitle: true,
+            enableDefaultShare: true,
+            animations: ANIMATIONS_SLIDE
         });
     }
 
@@ -47,17 +61,21 @@ export default class NewsCard extends Component {
                        </Button>
                    </Right>
                </CardItem>
-               <CardItem cardBody>
-                   <Image
-                       source={require("../img/bg.png")}
-                       style={{height: 200, width: null, flex: 1, resizeMode: "cover"}} />
-               </CardItem>
-               <CardItem>
-                   <Body>
-                       <Text>{title}</Text>
-                       <Text note>{body}</Text>
-                   </Body>
-               </CardItem>
+               <TouchableHighlight onPress ={() => this.openArticleUrl()}>
+                   <View>
+                       <CardItem cardBody>
+                           <Image
+                               source={require("../img/bg.png")}
+                               style={{height: 200, width: null, flex: 1, resizeMode: "cover"}} />
+                       </CardItem>
+                       <CardItem>
+                           <Body>
+                               <Text>{title}</Text>
+                               <Text note>{body}</Text>
+                           </Body>
+                       </CardItem>
+                   </View>
+               </TouchableHighlight>
                <CardItem cardButtons>
                    <Left>
                        <Button transparent>
