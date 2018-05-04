@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Body, Button, Container, Header, Icon, Left, Right, Tab, Text, Title} from "native-base";
 import {Tabs} from "native-base/src/index";
 import GlobalNews from "./GlobalNews";
+import SportsNews from "./SportsNews";
 
 export default class Dashboard extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -42,12 +43,12 @@ export default class Dashboard extends Component {
     render() {
         return (
             <Container>
-                <Tabs initialPage={0}>
+                <Tabs initialPage={1}>
                     <Tab heading='Global News'>
                         <GlobalNews/>
                     </Tab>
                     <Tab heading='Sports News'>
-                        <Text>Sports News</Text>
+                        <SportsNews />
                     </Tab>
                     <Tab heading='Technology'>
                         <Text>Tech News</Text>

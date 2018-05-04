@@ -7,7 +7,7 @@ import {
     ListItem,
     Text,
     Thumbnail,
-    View
+    View,
 } from "native-base";
 import {StackNavigator} from "react-navigation";
 import Dashboard from "./Dashboard";
