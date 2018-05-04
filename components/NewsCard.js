@@ -8,7 +8,7 @@ export default class NewsCard extends Component {
     showActionSheet(source = 'BBC News') {
         const BUTTONS = [
             { text: 'Hide story', icon: 'md-eye-off' },
-            { text: `Not interested in ${source}`, icon: 'md-notifications-off'},
+            { text: `Not interested in ${source}`, icon: 'md-remove-circle'},
             { text: 'Report story', icon: 'md-alert' },
             { text: 'Cancel', icon: 'md-close' }
         ];
