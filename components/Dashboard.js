@@ -3,6 +3,7 @@ import {Body, Button, Container, Header, Icon, Left, Right, Tab, Text, Title} fr
 import {Tabs} from "native-base/src/index";
 import GlobalNews from "./GlobalNews";
 import SportsNews from "./SportsNews";
+import TechnologyNews from "./TechnologyNews";
 
 export default class Dashboard extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -43,7 +44,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <Container>
-                <Tabs initialPage={1}>
+                <Tabs initialPage={0}>
                     <Tab heading='Global News'>
                         <GlobalNews/>
                     </Tab>
@@ -51,7 +52,7 @@ export default class Dashboard extends Component {
                         <SportsNews />
                     </Tab>
                     <Tab heading='Technology'>
-                        <Text>Tech News</Text>
+                        <TechnologyNews/>
                     </Tab>
                 </Tabs>
             </Container>

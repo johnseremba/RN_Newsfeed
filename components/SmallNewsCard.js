@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, CardItem, Text, View} from "native-base";
 import {Image, StyleSheet, TouchableHighlight} from "react-native";
 import {ANIMATIONS_SLIDE, CustomTabs} from "react-native-custom-tabs";
+import {colors} from "../resources/colors";
 
 export default class SmallNewsCard extends Component {
 
@@ -70,7 +71,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        maxWidth: 150
+        maxWidth: 150,
+        color: colors.colorPrimaryDark
     },
     imageContainer: {
         alignItems: 'flex-end',

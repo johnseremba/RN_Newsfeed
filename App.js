@@ -22,7 +22,7 @@ export default class App extends Component {
           Dashboard: { screen: Dashboard }
       }, {
           headerMode: 'screen',
-          initialRouteName: 'Dashboard',
+          initialRouteName: 'Login',
           navigationOptions: {
               headerStyle: {
                   backgroundColor: colors.colorPrimary
