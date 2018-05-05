@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Login from "./components/Login";
-import {StackNavigator} from "react-navigation";
+import { StackNavigator } from "react-navigation";
+import { Provider } from "react-redux";
+import { Drawer, getTheme, Root, StyleProvider } from "native-base";
 import Dashboard from "./components/Dashboard";
 import SideBar from "./components/SideBar";
 import {colors} from "./resources/colors";
-import {Drawer, getTheme, Root, StyleProvider} from "native-base";
 import newsfeedTheme from "./native-base-theme/variables/newsfeedTheme";
+import {store} from "./data/store/store";
 
 export default class App extends Component {
     closeDrawer = () => {
@@ -22,7 +24,7 @@ export default class App extends Component {
           Dashboard: { screen: Dashboard }
       }, {
           headerMode: 'screen',
-          initialRouteName: 'Login',
+          initialRouteName: 'Dashboard',
           navigationOptions: {
               headerStyle: {
                   backgroundColor: colors.colorPrimary
@@ -34,12 +36,14 @@ export default class App extends Component {
       return (
           <Root>
               <StyleProvider style={getTheme(newsfeedTheme)}>
-                  <Drawer
-                      ref={(ref) => { this.drawer = ref; }}
-                      content={<SideBar navigator={this.navigator} />}
-                      onClose={() => this.closeDrawer()} >
-                      <App screenProps={this.openDrawer.bind(this)} />
-                  </Drawer>
+                  <Provider store={store}>
+                      <Drawer
+                          ref={(ref) => { this.drawer = ref; }}
+                          content={<SideBar navigator={this.navigator} />}
+                          onClose={() => this.closeDrawer()} >
+                          <App screenProps={this.openDrawer.bind(this)} />
+                      </Drawer>
+                  </Provider>
               </StyleProvider>
           </Root>
       );

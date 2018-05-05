@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import {Body, Button, Container, Header, Icon, Left, Right, Tab, Text, Title} from "native-base";
 import {Tabs} from "native-base/src/index";
-import GlobalNews from "./GlobalNews";
-import SportsNews from "./SportsNews";
-import TechnologyNews from "./TechnologyNews";
+import LinkGlobalNews from "../data/containers/LinkGlobalNews";
+import LinkSportsNews from "../data/containers/LinkSportsNews";
+import LinkTechnologyNews from "../data/containers/LinkTechnologyNews";
 
 export default class Dashboard extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -46,13 +46,13 @@ export default class Dashboard extends Component {
             <Container>
                 <Tabs initialPage={0}>
                     <Tab heading='Global News'>
-                        <GlobalNews/>
+                        <LinkGlobalNews />
                     </Tab>
                     <Tab heading='Sports News'>
-                        <SportsNews />
+                        <LinkSportsNews />
                     </Tab>
                     <Tab heading='Technology'>
-                        <TechnologyNews/>
+                        <LinkTechnologyNews />
                     </Tab>
                 </Tabs>
             </Container>
