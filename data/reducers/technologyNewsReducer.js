@@ -1,9 +1,9 @@
-import { newsCategory, newsSourcesCategory } from "../actions/actions";
+import { requestNewsCategory, newsSourcesCategory } from "../actions/actions";
 import { combineReducers } from "redux";
 
 function technologyNews(state = [], action) {
     switch (action.type) {
-        case newsCategory.LOAD_TECHNOLOGY_NEWS:
+        case requestNewsCategory.REQUEST_TECHNOLOGY_NEWS:
             return action.data;
         default:
             return state;

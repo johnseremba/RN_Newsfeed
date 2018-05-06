@@ -4,12 +4,15 @@ import GlobalNews from "../../components/GlobalNews";
 const mapStateToProps = state => {
     return {
         sources: state.global.sources,
-        articles: state.global.articles
+        articles: state.global.articles,
+        isFetching: state.global.flags.isFetching,
+        errMsg: state.global.flags.errMsg,
+        receivedAt: state.global.flags.receivedAt
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return { dispatch };
 };
 
 const LinkGlobalNews = connect(

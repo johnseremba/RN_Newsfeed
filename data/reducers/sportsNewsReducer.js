@@ -1,9 +1,9 @@
-import { newsCategory, newsSourcesCategory } from "../actions/actions";
+import { requestNewsCategory, newsSourcesCategory } from "../actions/actions";
 import { combineReducers } from "redux";
 
 function sportsNews(state = [], action) {
     switch (action.type) {
-        case newsCategory.LOAD_SPORTS_NEWS:
+        case requestNewsCategory.REQUEST_SPORTS_NEWS:
             return action.data;
         default:
             return state;

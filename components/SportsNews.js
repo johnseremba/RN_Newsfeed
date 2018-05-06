@@ -4,7 +4,7 @@ import {Button, Container, Content, Footer, FooterTab, Icon, Text} from "native-
 import MainStoryCard from "./MainStoryCard";
 import SmallNewsCard from "./SmallNewsCard";
 
-const SportsNews = ({sources, data}) => (
+const SportsNews = ({sources, articles}) => (
     <Container>
         <Content>
             <MainStoryCard />

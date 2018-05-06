@@ -40,7 +40,7 @@ export default class SideBar extends Component {
                     source={require('../img/sidebar.png')}>
                     <View style={styles.container}>
                         <View style={{flexDirection: 'row'}}>
-                            <Thumbnail source={require('../img/bbc.png')} />
+                            <Thumbnail source={require('../img/bbc-news.png')} />
                             <View style={styles.textContainer}>
                                 <Text style={[styles.textColor, styles.header]}>John Seremba</Text>
                                 <Text style={styles.textColor}>john.seremba@andela.com</Text>

@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-import {Body, Button, Card, CardItem, Icon, Left, Right, Text, Thumbnail, ActionSheet, Toast, View} from 'native-base';
-import {Image, Platform, TouchableHighlight} from 'react-native';
-import {CustomTabs, ANIMATIONS_SLIDE} from "react-native-custom-tabs";
+import React from 'react';
+import { Body, Button, Card, CardItem, Icon, Left, Right, Text, Thumbnail, ActionSheet, Toast, View } from 'native-base';
+import { Image, Platform, TouchableHighlight } from 'react-native';
+import { CustomTabs, ANIMATIONS_SLIDE } from "react-native-custom-tabs";
+import {getNewsicon, timeSince} from "../data/services/getNewsIcon";
 
-export default class NewsCard extends Component {
+const NewsCard = ({ article }) => {
 
-    showActionSheet(source = 'BBC News') {
+    showActionSheet = (source) => {
         const BUTTONS = [
             { text: 'Hide story', icon: 'md-eye-off' },
             { text: `Not interested in ${source}`, icon: 'md-remove-circle'},
             { text: 'Report story', icon: 'md-alert' },
             { text: 'Cancel', icon: 'md-close' }
         ];
+
         ActionSheet.show({
             options: BUTTONS,
             cancelButtonIndex: 3,
@@ -22,9 +24,9 @@ export default class NewsCard extends Component {
                 duration: 3000
             });
         });
-    }
+    };
 
-    openArticleUrl(url = 'https://www.google.com') {
+    openArticleUrl = (url) => {
         CustomTabs.openURL(url, {
             toolbarColor: '#607D8B',
             enableUrlBarHiding: true,
@@ -32,66 +34,69 @@ export default class NewsCard extends Component {
             enableDefaultShare: true,
             animations: ANIMATIONS_SLIDE
         });
-    }
+    };
 
-    render() {
-        const source = 'BBC News';
-        const author = 'Crystal Bell';
-        const publishedDate = '20 hrs ago';
-        const title = 'Some really long and big title';
-        const body = 'Some long description text';
+    const source = article.source.name;
+    const author = article.author;
+    const publishedDate = timeSince(article.publishedAt);
+    const title = article.title;
+    const body = article.description;
+    const url = encodeURI(article.url);
+    const urlToImage = encodeURI(article.urlToImage);
+    const sourceIcon = getNewsicon(article.source.id);
 
-        return (
-           <Card>
-               <CardItem header>
-                   <Left>
-                       <Thumbnail source={require('../img/bbc.png')} />
+    return (
+       <Card>
+           <CardItem header>
+               <Left>
+                   <Thumbnail source={sourceIcon} />
+                   <Body>
+                       <Text>{source}</Text>
+                       <Text note>{author}</Text>
+                       <Text note style={{fontSize: 10}}>{publishedDate}</Text>
+                   </Body>
+               </Left>
+               <Right>
+                   <Button
+                       transparent
+                       style={{padding: 20}}
+                       onPress={() => this.showActionSheet(source)}>
+                       <Icon name={Platform.OS === "ios" ? "ios-more": "md-more"} />
+                   </Button>
+               </Right>
+           </CardItem>
+           <TouchableHighlight onPress ={() => this.openArticleUrl(url)}>
+               <View>
+                   <CardItem cardBody>
+                       <Image
+                           source={{uri: urlToImage}}
+                           style={{height: 200, width: null, flex: 1, resizeMode: "cover"}} />
+                   </CardItem>
+                   <CardItem>
                        <Body>
-                           <Text>{source}</Text>
-                           <Text note>{author}</Text>
-                           <Text note style={{fontSize: 10}}>{publishedDate}</Text>
+                           <Text numberOfLines={1}>{title}</Text>
+                           <Text note numberOfLines={3}>{body}</Text>
                        </Body>
-                   </Left>
-                   <Right>
-                       <Button
-                           transparent
-                           style={{padding: 20}}
-                           onPress={() => this.showActionSheet(source)}>
-                           <Icon name={Platform.OS === "ios" ? "ios-more": "md-more"} />
-                       </Button>
-                   </Right>
-               </CardItem>
-               <TouchableHighlight onPress ={() => this.openArticleUrl()}>
-                   <View>
-                       <CardItem cardBody>
-                           <Image
-                               source={require("../img/bg.png")}
-                               style={{height: 200, width: null, flex: 1, resizeMode: "cover"}} />
-                       </CardItem>
-                       <CardItem>
-                           <Body>
-                               <Text>{title}</Text>
-                               <Text note>{body}</Text>
-                           </Body>
-                       </CardItem>
-                   </View>
-               </TouchableHighlight>
-               <CardItem cardButtons>
-                   <Left>
-                       <Button transparent>
-                           <Icon name="thumbs-up" />
-                       </Button>
-                       <Button transparent>
-                           <Icon name="thumbs-down" />
-                       </Button>
-                   </Left>
-                   <Right>
-                       <Button transparent>
-                           <Icon name="md-share" />
-                       </Button>
-                   </Right>
-               </CardItem>
-           </Card>
-        );
-    }
-}
+                   </CardItem>
+               </View>
+           </TouchableHighlight>
+           <CardItem cardButtons>
+               <Left>
+                   <Button transparent>
+                       <Icon name="thumbs-up" />
+                   </Button>
+                   <Button transparent>
+                       <Icon name="thumbs-down" />
+                   </Button>
+               </Left>
+               <Right>
+                   <Button transparent>
+                       <Icon name="md-share" />
+                   </Button>
+               </Right>
+           </CardItem>
+       </Card>
+    );
+};
+
+export default NewsCard;
