@@ -19,3 +19,7 @@ export const newsSourcesCategory = {
     SPORTS_NEWS_SOURCE: 'SPORTS_NEWS_SOURCE',
     TECHNOLOGY_NEWS_SOURCE: 'TECHNOLOGY_NEWS_SOURCE'
 };
+
+export const userActions = {
+
+};

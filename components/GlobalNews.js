@@ -19,7 +19,7 @@ export default class GlobalNews extends Component {
         return (
             <Container>
                 <Content padder>
-                    {this.props.articles.map(article => <NewsCard key={article.url} article={article}/>)}
+                    {this.props.articles.map((article, index) => <NewsCard key={index} article={article}/>)}
                 </Content>
             </Container>
         );

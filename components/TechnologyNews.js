@@ -22,9 +22,9 @@ export default class TechnologyNews extends Component {
                 <Content padder>
                     {this.props.articles.map((article, index) => {
                         if((index % 3) === 0) {
-                            return <MainStoryCard key={article.url} article={article}/>;
+                            return <MainStoryCard key={index} article={article}/>;
                         } else {
-                            return (<NewsCard key={article.url} article={article}/>);
+                            return (<NewsCard key={index} article={article}/>);
                         }
                     })}
                 </Content>

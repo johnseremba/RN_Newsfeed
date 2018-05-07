@@ -51,9 +51,9 @@ const NewsCard = ({ article }) => {
                <Left>
                    <Thumbnail source={sourceIcon} />
                    <Body>
-                       <Text>{source}</Text>
-                       <Text note>{author}</Text>
-                       <Text note style={{fontSize: 10}}>{publishedDate}</Text>
+                       <Text numberOfLines={1}>{source}</Text>
+                       <Text note numberOfLines={1}>{author}</Text>
+                       <Text note style={{fontSize: 10}} numberOfLines={1}>{publishedDate}</Text>
                    </Body>
                </Left>
                <Right>
@@ -74,7 +74,7 @@ const NewsCard = ({ article }) => {
                    </CardItem>
                    <CardItem>
                        <Body>
-                           <Text numberOfLines={1}>{title}</Text>
+                           <Text numberOfLines={2}>{title}</Text>
                            <Text note numberOfLines={3}>{body}</Text>
                        </Body>
                    </CardItem>

@@ -20,13 +20,7 @@ export default class SportsNews extends Component {
         return (
             <Container>
                 <Content>
-                    {this.props.articles.map((article, index) => {
-                        if((index % 3) === 0) {
-                          return <MainStoryCard key={article.url} article={article}/>;
-                        } else {
-                          return (<SmallNewsCard key={article.url} article={article}/>);
-                        }
-                    })}
+                    {this.props.articles.map((article, index) => <MainStoryCard key={index} article={article}/> )}
                 </Content>
                 <Footer>
                     <FooterTab>
