@@ -21,5 +21,6 @@ export const newsSourcesCategory = {
 };
 
 export const userActions = {
-
+    REQUEST_USER_DATA: 'REQUEST_USER_DATA',
+    RECEIVE_USER_DATA: 'RECEIVE_USER_DATA'
 };

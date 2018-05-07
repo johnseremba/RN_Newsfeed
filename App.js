@@ -4,10 +4,10 @@ import { StackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
 import { Drawer, getTheme, Root, StyleProvider } from "native-base";
 import Dashboard from "./components/Dashboard";
-import SideBar from "./components/SideBar";
-import {colors} from "./resources/colors";
+import { colors } from "./resources/colors";
 import newsfeedTheme from "./native-base-theme/variables/newsfeedTheme";
-import {store} from "./data/store/store";
+import { store } from "./data/store/store";
+import LinkSideBar from "./data/containers/LinkSideBar";
 
 export default class App extends Component {
     closeDrawer = () => {
@@ -39,7 +39,7 @@ export default class App extends Component {
                   <Provider store={store}>
                       <Drawer
                           ref={(ref) => { this.drawer = ref; }}
-                          content={<SideBar navigator={this.navigator} />}
+                          content={<LinkSideBar />}
                           onClose={() => this.closeDrawer()} >
                           <App screenProps={this.openDrawer.bind(this)} />
                       </Drawer>
