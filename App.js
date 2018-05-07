@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Login from "./components/Login";
 import { StackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
 import { Drawer, getTheme, Root, StyleProvider } from "native-base";
@@ -8,6 +7,7 @@ import { colors } from "./resources/colors";
 import newsfeedTheme from "./native-base-theme/variables/newsfeedTheme";
 import { store } from "./data/store/store";
 import LinkSideBar from "./data/containers/LinkSideBar";
+import LinkLogin from "./data/containers/LinkLogin";
 
 export default class App extends Component {
     closeDrawer = () => {
@@ -20,11 +20,11 @@ export default class App extends Component {
 
     render() {
       const App = StackNavigator({
-          Login: { screen: Login },
+          Login: { screen: LinkLogin },
           Dashboard: { screen: Dashboard }
       }, {
           headerMode: 'screen',
-          initialRouteName: 'Dashboard',
+          initialRouteName: 'Login',
           navigationOptions: {
               headerStyle: {
                   backgroundColor: colors.colorPrimary

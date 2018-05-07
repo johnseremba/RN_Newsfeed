@@ -4,6 +4,7 @@ import {Tabs} from "native-base/src/index";
 import LinkGlobalNews from "../data/containers/LinkGlobalNews";
 import LinkSportsNews from "../data/containers/LinkSportsNews";
 import LinkTechnologyNews from "../data/containers/LinkTechnologyNews";
+import { NavigationActions } from "react-navigation";
 
 export default class Dashboard extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -38,7 +39,7 @@ export default class Dashboard extends Component {
     };
 
     componentDidMount() {
-        this.props.navigation.setParams({ openDrawer: () => this.props.screenProps() })
+        this.props.navigation.setParams({ openDrawer: () => this.props.screenProps() });
     }
 
     render() {

@@ -4,13 +4,21 @@ import { Platform, ImageBackground, StyleSheet, Text, View } from "react-native"
 import LinearGradient from "react-native-linear-gradient";
 
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.googleLogin = this.googleLogin.bind(this);
+    }
 
     static navigationOptions = {
         title: 'Login',
         header: false
     };
 
-    login() {
+    googleLogin() {
+        return this.props.navigation.navigate('Dashboard');
+    }
+
+    facebookLogin() {
         return this.props.navigation.navigate('Dashboard');
     }
 
@@ -30,27 +38,35 @@ export default class Login extends Component {
                         imageStyle={styles.bgImage}
                         style={styles.backgroundImage}>
                         <View style={styles.container}>
+
                             <Text style={[styles.heading, styles.textColor]}>
                                 {heading}
                             </Text>
+
                             <Text style={[styles.subheading, styles.textColor]}>
                                 {subHeading}
                             </Text>
+
                             <Button full rounded
                                     style={{marginTop: 50, backgroundColor: '#3b5998'}}
-                                    onPress={() => this.login()}
+                                    onPress={() => this.facebookLogin()}
                             >
                                 <Icon name='logo-facebook'/>
                                 <Text style={styles.textColor}>
                                     {facebookLabel}
                                 </Text>
                             </Button>
-                            <Button full rounded danger style={{marginTop: 20, backgroundColor: '#dd4b39'}}>
+
+                            <Button full rounded
+                                    style={{marginTop: 20, backgroundColor: '#dd4b39'}}
+                                    onPress={() => this.googleLogin()}
+                            >
                                 <Icon name='logo-googleplus'/>
                                 <Text style={styles.textColor}>
                                     {googleLabel}
                                 </Text>
                             </Button>
+
                         </View>
                         <Text style={[styles.footer, styles.textColor]}>
                             {copyright}
