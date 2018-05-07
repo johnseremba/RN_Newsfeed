@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { Container, Content, Text } from "native-base";
+import {Container, Content} from "native-base";
 import NewsCard from "./NewsCard";
-import { fetchNewsIfNeeded, requestNewsCategory } from "../data/actions/actions";
+import { fetchNewsIfNeeded } from "../data/actions/actions";
+import {requestNewsCategory} from "../data/actions/actionConstants";
 
 export default class GlobalNews extends Component {
     constructor(props) {

@@ -1,5 +1,11 @@
+import keyMirror from 'keymirror';
 
-export const getNewsicon = (source) => {
+const supportedNewsSources = keyMirror({
+    'bbc-news': null,
+    'cnn': null
+});
+
+export const getIcon = (source) => {
     switch (source) {
         case 'bbc-news':
             return require('../../img/bbc-news.png');
@@ -14,7 +20,7 @@ export const timeSince = (date) => {
     const intervals = { 31536000: 'year', 2592000: 'month', 86400: 'day', 3600: 'hour', 60: 'minute', 1: 'second' };
     date = new Date(date);
     const intervalInSeconds = getInterval((new Date() - date), 1000);
-    let result;
+    let result = '';
     Object.keys(intervals).forEach(interval => {
         let timeInterval = getInterval(intervalInSeconds, interval);
         if (timeInterval >= 1) {

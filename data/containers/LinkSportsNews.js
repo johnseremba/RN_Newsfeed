@@ -4,12 +4,15 @@ import SportsNews from "../../components/SportsNews";
 const mapStateToProps = state => {
     return {
         sources: state.sports.sources,
-        articles: state.sports.articles
+        articles: state.sports.articles,
+        isFetching: state.sports.flags.isFetching,
+        errMsg: state.sports.flags.errMsg,
+        receivedAt: state.sports.flags.receivedAt
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return { dispatch };
 };
 
 const LinkSportsNews = connect(

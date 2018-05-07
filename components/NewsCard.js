@@ -2,7 +2,7 @@ import React from 'react';
 import { Body, Button, Card, CardItem, Icon, Left, Right, Text, Thumbnail, ActionSheet, Toast, View } from 'native-base';
 import { Image, Platform, TouchableHighlight } from 'react-native';
 import { CustomTabs, ANIMATIONS_SLIDE } from "react-native-custom-tabs";
-import {getNewsicon, timeSince} from "../data/services/getNewsIcon";
+import { getIcon, timeSince } from "../data/services/helperFunctions";
 
 const NewsCard = ({ article }) => {
 
@@ -43,7 +43,7 @@ const NewsCard = ({ article }) => {
     const body = article.description;
     const url = encodeURI(article.url);
     const urlToImage = encodeURI(article.urlToImage);
-    const sourceIcon = getNewsicon(article.source.id);
+    const sourceIcon = getIcon(article.source.id);
 
     return (
        <Card>

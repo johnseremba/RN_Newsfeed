@@ -1,24 +1,6 @@
 import fetch from "cross-fetch";
-import {API_KEY} from "../constants";
-
-export const requestNewsCategory = {
-    REQUEST_GLOBAL_NEWS: 'REQUEST_GLOBAL_NEWS',
-    REQUEST_SPORTS_NEWS: 'REQUEST_SPORTS_NEWS',
-    REQUEST_TECHNOLOGY_NEWS: 'REQUEST_TECHNOLOGY_NEWS',
-    STOP_REQUEST_GLOBAL_NEWS: 'STOP_REQUEST_GLOBAL_NEWS'
-};
-
-export const receiveNewsCategory = {
-    RECEIVE_GLOBAL_NEWS: 'RECEIVE_GLOBAL_NEWS',
-    RECEIVE_SPORTS_NEWS: 'RECEIVE_SPORTS_NEWS',
-    RECEIVE_TECHNOLOGY_NEWS: 'RECEIVE_TECHNOLOGY_NEWS'
-};
-
-export const newsSourcesCategory = {
-    GLOBAL_NEWS_SOURCE: 'GLOBAL_NEWS_SOURCE',
-    SPORTS_NEWS_SOURCE: 'SPORTS_NEWS_SOURCE',
-    TECHNOLOGY_NEWS_SOURCE: 'TECHNOLOGY_NEWS_SOURCE'
-};
+import { API_KEY } from "../constants";
+import { receiveNewsCategory, requestNewsCategory } from "./actionConstants";
 
 export function requestNewsAction(category) {
     return { type: category };
@@ -31,15 +13,45 @@ export function receiveNewsAction(category, data) {
     }
 }
 
+function getReceiveCategory(category) {
+    switch (category) {
+        case requestNewsCategory.REQUEST_GLOBAL_NEWS:
+            return receiveNewsCategory.RECEIVE_GLOBAL_NEWS;
+        case requestNewsCategory.REQUEST_SPORTS_NEWS:
+            return receiveNewsCategory.RECEIVE_SPORTS_NEWS;
+        case requestNewsCategory.REQUEST_TECHNOLOGY_NEWS:
+            return receiveNewsCategory.RECEIVE_TECHNOLOGY_NEWS;
+        default:
+            return;
+    }
+}
+
+function getStopRequestCategory(category) {
+    switch (category) {
+        case requestNewsCategory.REQUEST_GLOBAL_NEWS:
+            return receiveNewsCategory.STOP_REQUEST_GLOBAL_NEWS;
+        case requestNewsCategory.REQUEST_SPORTS_NEWS:
+            return receiveNewsCategory.STOP_REQUEST_SPORTS_NEWS;
+        case requestNewsCategory.REQUEST_TECHNOLOGY_NEWS:
+            return receiveNewsCategory.STOP_REQUEST_TECHNOLOGY_NEWS;
+        default:
+            return;
+    }
+}
+
 function fetchNews(category, sources) {
     return dispatch => {
         dispatch(requestNewsAction(category));
-        let category2 = receiveNewsCategory.RECEIVE_GLOBAL_NEWS;
+        let receiveCategory = getReceiveCategory(category);
+        let stopRequestCategory = getStopRequestCategory(category);
         return sources.map(source => {
             const url = encodeURI(`https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${API_KEY}`);
             return fetch(url)
                 .then(response => response.json())
-                .then(data => dispatch(receiveNewsAction(category2, data)));
+                .then(data => {
+                    return dispatch(receiveNewsAction(receiveCategory, data));
+                    // return dispatch(requestNewsAction(receiveNewsCategory.STOP_REQUEST_GLOBAL_NEWS));
+                });
             }
         );
     };
@@ -50,6 +62,12 @@ function shouldFetchPosts(state, category) {
     switch(category) {
         case requestNewsCategory.REQUEST_GLOBAL_NEWS:
             articles = state.global;
+            break;
+        case requestNewsCategory.REQUEST_SPORTS_NEWS:
+            articles = state.sports;
+            break;
+        case requestNewsCategory.REQUEST_TECHNOLOGY_NEWS:
+            articles = state.technology;
             break;
         default:
             return;

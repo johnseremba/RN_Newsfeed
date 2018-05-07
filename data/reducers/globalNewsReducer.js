@@ -1,5 +1,5 @@
-import {requestNewsCategory, newsSourcesCategory, receiveNewsCategory, receiveNewsAction} from "../actions/actions";
 import { combineReducers } from "redux";
+import { newsSourcesCategory, receiveNewsCategory, requestNewsCategory } from "../actions/actionConstants";
 
 function globalNewsSource(state = ['bbc-news', 'cnn', 'fox-news'], action) {
     switch (action.type) {
@@ -13,11 +13,13 @@ function globalNewsSource(state = ['bbc-news', 'cnn', 'fox-news'], action) {
 function requestNews(state = {}, action) {
     switch (action.type) {
         case requestNewsCategory.REQUEST_GLOBAL_NEWS:
-            return {...state,
+            return {
+                ...state,
                 isFetching: true
             };
         case requestNewsCategory.STOP_REQUEST_GLOBAL_NEWS:
             return {
+                ...state,
                 isFetching: false,
                 receivedAt: Date.now()
             };
@@ -25,12 +27,12 @@ function requestNews(state = {}, action) {
             return {
                 isFetching: false,
                 errMsg: '',
-                receivedAt: Date.now()
+                receivedAt: ''
             };
     }
 }
 
-function receiveGlobalNews(state = [], action) {
+function receiveNews(state = [], action) {
     switch (action.type) {
         case receiveNewsCategory.RECEIVE_GLOBAL_NEWS:
             return state.concat(action.data.articles);
@@ -39,8 +41,9 @@ function receiveGlobalNews(state = [], action) {
     }
 }
 
+
 export const globalNewsReducer = combineReducers({
     sources: globalNewsSource,
-    articles: receiveGlobalNews,
+    articles: receiveNews,
     flags: requestNews
 });

@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import {Card, CardItem, Text, View} from "native-base";
 import {Image, ImageBackground, StyleSheet, TouchableHighlight} from "react-native";
 import {ANIMATIONS_SLIDE, CustomTabs} from "react-native-custom-tabs";
+import {getIcon, timeSince} from "../data/services/helperFunctions";
 
-export default class MainStoryCard extends Component {
+const MainStoryCard = ({ article }) => {
 
-    openArticleUrl(url = "https://www.google.com") {
+    const openArticleUrl = (url) => {
         CustomTabs.openURL(url, {
             toolbarColor: '#607D8B',
             enableUrlBarHiding: true,
@@ -13,36 +14,41 @@ export default class MainStoryCard extends Component {
             enableDefaultShare: true,
             animations: ANIMATIONS_SLIDE
         });
-    }
+    };
 
-    render() {
-        const title = "Messi takes on Ronaldo";
-        const desc = `${'Sed ut perspiciatis unde omnis isle natus error sit voluptatem accusantiu doloremque laudantium, totam'}`;
-        return (
-            <Card>
-                <TouchableHighlight onPress={() => this.openArticleUrl()}>
-                    <CardItem cardBody>
-                        <ImageBackground
-                            imageStyle={{resizeMode: 'cover'}}
-                            style={styles.bgImage}
-                            source={require('../img/bg.png')}>
-                            <View style={styles.container}>
-                                <View style={styles.contentBg}>
-                                    <Text style={styles.header}>
-                                        {title}
-                                    </Text>
-                                    <Text note numberOfLines={2} style={{color: '#ffffff'}}>
-                                        {desc}
-                                    </Text>
-                                </View>
+    const source = article.source.name;
+    const author = article.author;
+    const publishedDate = timeSince(article.publishedAt);
+    const title = article.title;
+    const body = article.description;
+    const url = encodeURI(article.url);
+    const urlToImage = encodeURI(article.urlToImage);
+    const sourceIcon = getIcon(article.source.id);
+
+    return (
+        <Card>
+            <TouchableHighlight onPress={() => openArticleUrl(url)}>
+                <CardItem cardBody>
+                    <ImageBackground
+                        imageStyle={{resizeMode: 'cover'}}
+                        style={styles.bgImage}
+                        source={{uri: urlToImage}}>
+                        <View style={styles.container}>
+                            <View style={styles.contentBg}>
+                                <Text style={styles.header} numberOfLines={2}>
+                                    {title}
+                                </Text>
+                                <Text note numberOfLines={2} style={{color: '#ffffff'}}>
+                                    {body}
+                                </Text>
                             </View>
-                        </ImageBackground>
-                    </CardItem>
-                </TouchableHighlight>
-            </Card>
-        );
-    }
-}
+                        </View>
+                    </ImageBackground>
+                </CardItem>
+            </TouchableHighlight>
+        </Card>
+    );
+};
 
 const styles = StyleSheet.create({
     bgImage: {
@@ -64,3 +70,5 @@ const styles = StyleSheet.create({
         fontSize: 20
     }
 });
+
+export default MainStoryCard;
