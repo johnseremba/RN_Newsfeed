@@ -9,28 +9,20 @@ import {
     Thumbnail,
     View,
 } from "native-base";
-import {StackNavigator} from "react-navigation";
-import Dashboard from "./Dashboard";
-import Login from "./Login";
-import {colors} from "../resources/colors";
-import {ImageBackground, StyleSheet} from "react-native";
+import { colors } from "../resources/colors";
+import { ImageBackground, StyleSheet } from "react-native";
 
 export default class SideBar extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
-        const App = StackNavigator({
-            Login: { screen: Login },
-            Dashboard: { screen: Dashboard }
-        }, {
-            headerMode: 'screen',
-            initialRouteName: 'Dashboard',
-            navigationOptions: {
-                headerStyle: {
-                    backgroundColor: colors.colorPrimary
-                },
-                headerTintColor: '#ffffff'
-            }
-        });
+        const name = this.props.name;
+        const email = this.props.email;
+        const pictureUrl = this.props.pictureUrl
+            ? { uri: this.props.pictureUrl }
+            : require('../img/blank-profile-picture.png') ;
 
         return(
             <Content style={{backgroundColor: '#ffffff'}}>
@@ -38,15 +30,21 @@ export default class SideBar extends Component {
                     imageStyle={{resizeMode: 'cover'}}
                     style={styles.coverImage}
                     source={require('../img/sidebar.png')}>
+
                     <View style={styles.container}>
                         <View style={{flexDirection: 'row'}}>
-                            <Thumbnail source={require('../img/bbc-news.png')} />
+                            <Thumbnail source={pictureUrl} />
                             <View style={styles.textContainer}>
-                                <Text style={[styles.textColor, styles.header]}>John Seremba</Text>
-                                <Text style={styles.textColor}>john.seremba@andela.com</Text>
+                                <Text style={[styles.textColor, styles.header]}>
+                                    {name}
+                                </Text>
+                                <Text style={styles.textColor}>
+                                    {email}
+                                </Text>
                             </View>
                         </View>
                     </View>
+
                 </ImageBackground>
                 <List>
                     <ListItem icon>
