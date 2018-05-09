@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
-import { API_KEY } from "../constants";
 import { receiveNewsCategory, requestNewsCategory, userActions } from "./actionConstants";
+import {API_KEY} from "../../apiKey";
 
 export function requestNewsAction(category) {
     return { type: category };
