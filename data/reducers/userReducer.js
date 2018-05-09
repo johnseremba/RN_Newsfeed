@@ -5,26 +5,24 @@ function userReducer(state = {}, action) {
         case userActions.REQUEST_USER_DATA:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                authType: action.authType
             };
         case userActions.RECEIVE_USER_DATA:
+            const name = action.data.user.displayName;
             return {
                 ...state,
                 loading: false,
                 userObj: {
-                    name: action.data.name,
-                    email: action.data.email,
-                    pictureUrl: action.data.pictureUrl
+                    name: action.data.user.isAnonymous ? 'Guest' : name,
+                    email: action.data.user.email,
+                    pictureUrl: action.data.user.photoURL
                 }
             };
         default:
             return {
                 loading: false,
-                userObj: {
-                    name: 'Guest',
-                    email: '',
-                    pictureUrl: ''
-                }
+                userObj: {}
             };
     }
 }

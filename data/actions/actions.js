@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
 import { API_KEY } from "../constants";
-import {receiveNewsCategory, requestNewsCategory, userActions} from "./actionConstants";
+import { receiveNewsCategory, requestNewsCategory, userActions } from "./actionConstants";
 
 export function requestNewsAction(category) {
     return { type: category };
@@ -13,9 +13,10 @@ export function receiveNewsAction(category, data) {
     };
 }
 
-export function requestUserData() {
+export function requestUserData(authType) {
     return {
-        type: userActions.REQUEST_USER_DATA
+        type: userActions.REQUEST_USER_DATA,
+        authType: authType
     };
 }
 
