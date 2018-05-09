@@ -56,6 +56,6 @@ buck-out/
 *.jsbundle
 
 apiKey.js
-android/app/google-services.json
-ios/GoogleService-Info.plist
+*/google-services.json
+*/GoogleService-Info.plist
 
