@@ -31,12 +31,14 @@ You can generate a signed APK to run on your device or you can run on any prefer
 ## Screenshots
 ### Login Screen
 The user can login with with either facebook or with a Google email
-![Login Page]()
+![Login Page](https://github.com/SerryJohns/RN_Newsfeed/blob/master/screenshots/login.png)
 
 ### Global Newsfeed
 Global news feed. Here is an example preview of news from different sources.
-![Global News]()
+![Global News](https://github.com/SerryJohns/RN_Newsfeed/blob/master/screenshots/global.png)
 
-### Profile Information
-Here is the profile drawer. The user can customize his/her experience using  any of the options of the drawer menu.
-![Drawer]()
+### Sports News
+![Drawer](https://github.com/SerryJohns/RN_Newsfeed/blob/master/screenshots/sports.png)
+
+### Technology News
+![Drawer](https://github.com/SerryJohns/RN_Newsfeed/blob/master/screenshots/tech.png)
