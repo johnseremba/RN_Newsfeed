@@ -147,6 +147,7 @@ dependencies {
     // Firebase dependencies
     implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:15.0.2"
+    implementation "com.google.firebase:firebase-auth:15.1.0"
 
     implementation "com.android.support:appcompat-v7:25.0.1"
     implementation "com.facebook.react:react-native:+"  // From node_modules

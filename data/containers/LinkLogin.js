@@ -4,6 +4,7 @@ import Login from "../../components/Login";
 const mapStateToProps = state => {
     return {
         loading: state.user.loading,
+        userObj: state.user.userObj
     };
 };
 

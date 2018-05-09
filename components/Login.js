@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import {Button, Container, Icon} from "native-base";
+import { Button, Container, Icon } from "native-base";
 import { Platform, ImageBackground, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { colors } from "../resources/colors";
+import firebase from "react-native-firebase";
+import {receiveUserData, requestUserData} from "../data/actions/actions";
+import {authTypes} from "../data/constants";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.googleLogin = this.googleLogin.bind(this);
+        this.facebookLogin = this.facebookLogin.bind(this);
+        this.anonymousLogin = this.anonymousLogin.bind(this);
     }
 
     static navigationOptions = {
@@ -22,12 +28,34 @@ export default class Login extends Component {
         return this.props.navigation.navigate('Dashboard');
     }
 
+    anonymousLogin() {
+        const { dispatch } = this.props;
+        dispatch(requestUserData(authTypes.ANONYMOUS));
+
+        firebase.auth()
+            .signInAnonymouslyAndRetrieveData()
+            .then(userData => {
+                if (userData) {
+                    dispatch(receiveUserData(userData));
+                }
+            });
+
+        return this.props.navigation.navigate('Dashboard');
+    }
+
+    componentDidMount() {
+        if(firebase.auth().currentUser) {
+            this.props.navigation.navigate('Dashboard');
+        }
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         const heading = 'NEWS FEED';
         const subHeading = 'Stay informed';
         const facebookLabel = 'Login with Facebook';
         const googleLabel = 'Login with Google';
+        const anonymousLable = "Be Anonymous";
         const copyright = '(c) Serions Systems 2018';
 
         return (
@@ -65,6 +93,16 @@ export default class Login extends Component {
                                 <Text style={styles.textColor}>
                                     {googleLabel}
                                 </Text>
+                            </Button>
+
+                            <Button full rounded
+                                    style={{marginTop: 20, backgroundColor: colors.colorPrimary}}
+                                    onPress={() => this.anonymousLogin()}
+                                >
+                                <Text style={styles.textColor}>
+                                    {anonymousLable}
+                                </Text>
+                                <Icon name='ios-arrow-forward' style={{color: colors.colorPrimaryLight}} />
                             </Button>
 
                         </View>

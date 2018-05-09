@@ -8,6 +8,8 @@ import newsfeedTheme from "./native-base-theme/variables/newsfeedTheme";
 import { store } from "./data/store/store";
 import LinkSideBar from "./data/containers/LinkSideBar";
 import LinkLogin from "./data/containers/LinkLogin";
+import firebase from "react-native-firebase";
+import {receiveUserData} from "./data/actions/actions";
 
 export default class App extends Component {
     closeDrawer = () => {
@@ -17,6 +19,17 @@ export default class App extends Component {
     openDrawer = () => {
         this.drawer._root.open();
     };
+
+    componentDidMount() {
+        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+            this.store.dispatch(receiveUserData(user));
+        });
+        this.authSubscription();
+    }
+
+    componentWillUnmount() {
+        this.authSubscription();
+    }
 
     render() {
       const App = StackNavigator({
